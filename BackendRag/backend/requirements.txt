@@ -2,5 +2,7 @@ flask
 flask-cors
 gunicorn
 langchain
+langchain-community
+langchain-text-splitters
 chromadb
 pypdf
