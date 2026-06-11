@@ -32,7 +32,7 @@ const App = () => {
 
     try {
       const response = await axios.post(
-        "https://hr-backend-bdy3.onrender.com",
+        "https://hr-backend-bdy3.onrender.com/chat",
         {
           question,
         }
