@@ -39,55 +39,26 @@ def load_vectorstore():
 
     print("🔄 Loading vector database...")
 
-    from langchain_community.document_loaders import PyPDFLoader
-    from langchain_text_splitters import RecursiveCharacterTextSplitter
     from langchain_community.embeddings import HuggingFaceEmbeddings
     from langchain_chroma import Chroma
 
-    documents = []
-
-    for pdf_file in Path(PDF_FOLDER).glob("*.pdf"):
-        loader = PyPDFLoader(str(pdf_file))
-        docs = loader.load()
-
-        for doc in docs:
-            doc.metadata["source_file"] = pdf_file.name
-
-        documents.extend(docs)
-
-    print("Loaded pages:", len(documents))
-
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNK_OVERLAP
-    )
-
-    chunks = splitter.split_documents(documents)
-    print("Total Chunks:", len(chunks))
-
-    print("Loading embedding model...")
     embedding_model = HuggingFaceEmbeddings(
         model_name=EMBED_MODEL
     )
 
-    print("Embedding model loaded")
-
-    print("CHROMA_DIR =", CHROMA_DIR)
-    print("Exists =", os.path.exists(CHROMA_DIR))
-    if os.path.exists(CHROMA_DIR):
-        print("Files inside chroma_db:")
-        print(os.listdir(CHROMA_DIR))
     if not os.path.exists(CHROMA_DIR):
-        raise Exception("chroma_db folder not found on server")
+        raise Exception(f"Chroma DB not found: {CHROMA_DIR}")
 
     vectorstore = Chroma(
-    persist_directory=CHROMA_DIR,
-    embedding_function=embedding_model
+        persist_directory=CHROMA_DIR,
+        embedding_function=embedding_model
     )
-    print("Vectorstore =", vectorstore)
+
     retriever = vectorstore.as_retriever(
-    search_kwargs={"k": TOP_K}
+        search_kwargs={"k": TOP_K}
     )
+
+    print("✅ Vector database loaded")
 
 # ---------------- LOAD LLM ----------------
 def load_llm():

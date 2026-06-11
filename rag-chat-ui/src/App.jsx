@@ -66,7 +66,7 @@ const App = () => {
           <div className="header-info">
             <ChatWindow />
             <h2 className="logo-text">NOVA AI</h2>
-            <h3 className="logo-text">How may I help you today?</h3>
+            <h3 className="logo-text-sub">How may I help you today?</h3>
           </div>
         </div>
 

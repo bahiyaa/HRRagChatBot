@@ -53,6 +53,11 @@ body{
   font-size: 1.31rem;
   font-weight: 600;
 }
+.header-info .logo-text-sub{
+  color:#ffff;
+  font-size: 1.1rem;
+  font-weight: 200;
+}
 
 .chat-header button{
   height: 40px;
