@@ -65,7 +65,8 @@ const App = () => {
         <div className="chat-header">
           <div className="header-info">
             <ChatWindow />
-            <h2 className="logo-text">RAG Assistant</h2>
+            <h2 className="logo-text">NOVA AI</h2>
+            <h3 className="logo-text">How may I help you today?</h3>
           </div>
         </div>
 
