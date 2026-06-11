@@ -65,25 +65,25 @@ def load_vectorstore():
     chunks = splitter.split_documents(documents)
     print("Total Chunks:", len(chunks))
 
+    print("Loading embedding model...")
     embedding_model = HuggingFaceEmbeddings(
         model_name=EMBED_MODEL
     )
 
-    if os.path.exists(CHROMA_DIR):
-        vectorstore = Chroma(
-            persist_directory=CHROMA_DIR,
-            embedding_function=embedding_model
-        )
-        print("Loaded existing vector DB")
-    else:
-        vectorstore = Chroma.from_documents(
-            documents=chunks,
-            embedding=embedding_model,
-            persist_directory=CHROMA_DIR
-        )
-        print("Created new vector DB")
+    print("Embedding model loaded")
+    
+    if not os.path.exists(CHROMA_DIR):
+        raise Exception("chroma_db folder not found on server")
+    vectorstore = Chroma(
+    persist_directory=CHROMA_DIR,
+    embedding_function=embedding_model
+)
 
-    retriever = vectorstore.as_retriever(search_kwargs={"k": TOP_K})
+print("Loaded existing vector DB")
+
+retriever = vectorstore.as_retriever(
+    search_kwargs={"k": TOP_K}
+)
 
 
 # ---------------- LOAD LLM ----------------

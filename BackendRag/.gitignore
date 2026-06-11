@@ -7,8 +7,7 @@ bia_env/
 venv/
 .venv/
 
-# Chroma
-chroma_db/
+
 
 # Generated files
 answer.mp3
