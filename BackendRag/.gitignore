@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+# Environment
+.env
+bia_env/
+venv/
+.venv/
+
+# Chroma
+chroma_db/
+
+# Generated files
+answer.mp3
+
+# React
+node_modules/
+dist/
+
+# VS Code
+.vscode/
+
+rag_chatbot_clean.ipynb
